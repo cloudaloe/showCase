@@ -1,0 +1,66 @@
+<html>
+<head>
+    <script src="https://apis.google.com/js/client.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>
+        // User Submitted Variables
+        var project_id = 'cloudaloe.org:alpha330';
+        var client_id = 'XXXXXXXXXXXXXXXXXX.apps.googleusercontent.com';
+
+        var config = {
+            'client_id': client_id,
+            'scope': 'https://www.googleapis.com/auth/bigquery'
+        };
+
+        function showProjects() {
+            var request = gapi.client.bigquery.projects.list();
+            request.execute(function(response) {
+                $('#result_box').html(JSON.stringify(response, null));
+            });
+        }
+
+        function showDatasets() {
+            var request = gapi.client.bigquery.datasets.list({
+                'projectId':'publicdata'
+            });
+            request.execute(function(response) {
+                $('#result_box').html(JSON.stringify(response.result.datasets, null));
+            });
+        }
+
+        function runQuery() {
+            var request = gapi.client.bigquery.jobs.query({
+                'projectId': project_id,
+                'timeoutMs': '30000',
+                'query': 'SELECT TOP(repository_language, 5) as language, COUNT(*) as count FROM [publicdata:samples.github_timeline] WHERE repository_language != "";'
+            });
+            request.execute(function(response) {
+                console.log(response);
+                $('#result_box').html(JSON.stringify(response.result.rows, null));
+            });
+        }
+
+        function auth() {
+            gapi.auth.authorize(config, function() {
+                gapi.client.load('bigquery', 'v2');
+                $('#client_initiated').html('BigQuery client initiated');
+                $('#auth_button').fadeOut();
+                $('#projects_button').fadeIn();
+                $('#dataset_button').fadeIn();
+                $('#query_button').fadeIn();
+            });
+        }
+
+    </script>
+</head>
+
+<body>
+<h2>BigQuery + JavaScript Example</h2>
+<button id="auth_button" onclick="auth();">Authorize</button>
+<div id="client_initiated"></div>
+<button id="projects_button" style="display:none;" onclick="showProjects();">Show Projects</button>
+<button id="dataset_button" style="display:none;" onclick="showDatasets();">Show datasets</button>
+<button id="query_button" style="display:none;" onclick="runQuery();">Run Query</button>
+<div id="result_box"></div>
+</body>
+</html>

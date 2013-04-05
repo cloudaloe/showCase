@@ -1,0 +1,161 @@
+
+
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+      canvas {
+        border: 1px solid #9C9898;
+      }
+    </style>
+    <script src="http://www.html5canvastutorials.com/libraries/kinetic-v4.0.0.js"></script>
+	<script type='text/javascript' src='http://d3js.org/d3.v2.js'></script>    		
+	
+    <script>
+      window.onload = function() {
+        var stage = new Kinetic.Stage({
+          container: "container",
+          width: 578,
+          height: 200
+        });
+        var layer = new Kinetic.Layer();
+		
+		var line = new Kinetic.Line({
+          points: [0, 200, 340, 23, 450, 60, 500, 20],
+          stroke: "orange",
+          strokeWidth: 2,
+          lineCap: "round",
+          lineJoin: "round"
+        });
+		
+        var greenBox = new Kinetic.Rect({
+          x: 100,
+          y: stage.getHeight() / 2,
+          width: 100,
+          height: 50,
+          fill: 'green',
+          stroke: 'black',
+          strokeWidth: 4,
+          offset: {
+            x: 50,
+            y: 25
+          }
+        });
+
+        var blueBox = new Kinetic.Rect({
+          x: stage.getWidth() / 2,
+          y: stage.getHeight() / 2,
+          width: 100,
+          height: 50,
+          fill: 'blue',
+          stroke: 'black',
+          strokeWidth: 4,
+          offset: {
+            x: 50,
+            y: 25
+          }
+        });
+
+        var redBox = new Kinetic.Rect({
+          x: 478,
+          y: stage.getHeight() / 2,
+          width: 100,
+          height: 50,
+          fill: 'red',
+          stroke: 'black',
+          strokeWidth: 4,
+          offset: {
+            x: 50,
+            y: 25
+          }
+        });
+        
+          function addHovers(shape, easing) {
+        shape.on("mouseover touchstart", function() {
+          greenBox.transitionTo({
+            scale: {
+              x: 2,
+              y: 1.5
+            },
+            duration: 1,
+            easing: 'bounce-ease-in-out'
+          });
+          blueBox.transitionTo({
+            scale: {
+              x: 2,
+              y: 1.5
+            },
+            duration: 1,
+            easing: easing
+          });
+        });
+        shape.on("mouseout touchend", function() {
+          greenBox.transitionTo({
+            scale: {
+              x: 1,
+              y: 1
+            },
+            duration: 1,
+            easing: easing,
+			callback: function() {
+              console.log('transition complete!');				
+			}
+          });
+          
+          blueBox.transitionTo({
+            scale: {
+              x: 1,
+              y: 1
+            },
+            duration: 1,
+            easing: easing,
+			callback: function() {
+              console.log('transition complete!');				
+			}			  
+          });          
+        });
+      }
+
+        addHovers(greenBox, "ease-in");
+        addHovers(blueBox, "ease-out");
+        addHovers(redBox, "ease-in-out");
+		addHovers(line, "ease-in-out");
+
+        layer.add(greenBox);
+        layer.add(blueBox);
+        layer.add(redBox);
+        layer.add(line);
+		
+		redBox.setFill(d3.hsl(120, 0.5, 0.5).toString());
+		
+        stage.add(layer);
+		
+		var angularSpeed = Math.PI / 2;
+		var anim = new Kinetic.Animation({
+          func: function(frame) {
+            var angleDiff = frame.timeDiff * angularSpeed / 1000;
+            blueBox.rotate(angleDiff);
+			redBox.rotate(angleDiff);
+			redBox.setFill(d3.hsl(120, Math.cos(frame.time), 0.6).toString());		
+			console.log(frame.timeDiff);
+          },
+          node: layer
+        });
+
+        anim.start();
+		
+      };
+
+    </script>
+  </head>
+  <body>
+    <div id="container"></div>
+  </body>
+</html>
+
+
+

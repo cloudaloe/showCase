@@ -1,0 +1,82 @@
+body {
+	background-color: #f9f9f9;
+    font-family: Helvetica, Arial, Sans-serif;
+    font-size:0.75em;
+}
+
+#questionContainer {
+	display: visible;
+	box-shadow: 0px 0px 3px #888;			
+	margin-top: 3.5em;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 12px;		
+	border: 0px solid rgb(200,200,200);		
+	padding: 1.3em;	
+	background-color: #c5c5c5;	
+	font-family: Helvetica, Arial, Sans-serif;		
+	color:#FFF;
+	font-size:1.1em;	
+	width: 700px;
+}
+
+#questionContainer:hover {
+	/*background-color: #e4e2da;*/
+	background-color: #d2d3d4;	
+}
+
+#questionInput {
+	width: 99.5%;
+	margin-top: 7px;	
+	margin-bottom: 5px;	
+	border-radius: 4px;	
+	padding: 6px 4px 6px 4px;	
+	font-size: 1em;	
+	color: #101010;
+}
+
+#chartContainer {
+	display: visible;
+	width: 80%;
+	height: 60%;
+	position: relative;	
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 2em%;
+	margin-bottom: 15%;	
+	border: 0px solid rgb(200,200,200);		
+	border-radius: 7px;
+	padding: 2em;
+	background-color: #f0eee9;
+}
+
+#dataDetail {
+    display: visible;
+    width: 30%;
+    height: 4em;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    border: 1px solid rgb(5a,5a,5a);
+    border-radius: 3px;
+    padding: 2em;
+    background-color: #8a8a8a;
+}
+
+path {
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
+}
+
+.Axis path, .Axis line, .Axis {
+    fill: none;
+    stroke: grey;
+    stroke-width: 0.8;
+    shape-rendering: crispEdges;
+    font-size:0.6em;
+line {
+    stroke: black;
+}

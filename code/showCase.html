@@ -1,0 +1,45 @@
+<html>
+	<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script type='text/javascript' src='http://d3js.org/d3.v2.js'></script>
+		<link type="text/css" href="jquery/css/custom-theme/jquery-ui-1.8.23.custom.css" rel="stylesheet" />
+		<script type="text/javascript" src="jquery/js/jquery-1.8.0.min.js"></script>
+		<script type="text/javascript" src="jquery/js/jquery-ui-1.8.23.custom.min.js"></script>
+		<!--script type='text/javascript' src='./lib/hadasClientListener.js'></script-->		
+		<script type="text/javascript" src="./lib/kinetic-v4.0.1.min.js"></script>		
+		<script type='text/javascript' src="./canvas.js"></script> 								
+		<script type='text/javascript' src="./init.js"></script> 				
+		<script type='text/javascript' src="./data.js"></script> 						
+		<script type='text/javascript' src="./chart.js"></script> 						
+		
+		<link rel="stylesheet" type="text/css" href="./css.css">
+						
+		<title>
+		</title>
+	</head>
+  	<body>
+		<form id="questionContainer" onmouseover="focusOnInput()">
+			<strong>What would you like to see or know?</strong>
+			<div>
+				<input id="questionInput" name="" maxlength="254" type="text">
+			</div>
+		</form>
+		<div id='chartContainer'></div>
+			<!--svg id='chart'-->
+    </body>
+
+	<script>
+		function focusOnInput(){
+			document.getElementById('questionInput').focus();}
+
+   		function onLoad() {
+			initializeBackground();
+			animateChartContainer();
+			//hideQuestionBar();
+            //csvLoad("mock-data/table11.csv");
+		}
+
+		window.onload = onLoad;
+
+	</script>
+</html>
